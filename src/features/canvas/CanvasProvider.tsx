@@ -36,9 +36,6 @@ interface MousePositionProviderProps {
 
 // Provider component
 export const CanvasProvider: React.FC<MousePositionProviderProps> = ({ children }) => {
-  // const [relativeMousePosition, setRelativeMousePosition] = useState({ x: 0, y: 0, timeStamp: 0 })
-  // const [client, setClient] = useState({ x: 0, y: 0 })
-  // const [isMouseDown, setMouseDown] = useState(false)
   const [pan, setPan] = useState({ x: 0, y: 0 })
 
   const [mouseData, setMouseData] = useState({

@@ -21,6 +21,13 @@ import VerticalNavHeader from './VerticalNavHeader'
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
+// Options
+import { TOOL_LIST } from 'src/features/cursor-tools/toolList'
+
+// Redux
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/state/store'
+
 interface Props {
   hidden: boolean
   navWidth: number
@@ -59,9 +66,8 @@ const Navigation = (props: Props) => {
     verticalNavMenuContent: userVerticalNavMenuContent
   } = props
 
-  // ** States
-  const [groupActive, setGroupActive] = useState<string[]>([])
-  const [currentActiveGroup, setCurrentActiveGroup] = useState<string[]>([])
+  // Redux
+  const { cursorTool } = useSelector((state: RootState) => state.toolbar)
 
   // ** Ref
   const shadowRef = useRef(null)
@@ -133,9 +139,9 @@ const Navigation = (props: Props) => {
               userVerticalNavMenuContent(props)
             ) : (
               <List className='nav-items' sx={{ transition: 'padding .25s ease', pr: 4.5 }}>
-                {/* {
-                  Options go here
-                } */}
+                {TOOL_LIST.map(tool => {
+                  if (tool.name === cursorTool) return tool.optionsComponent
+                })}
               </List>
             )}
           </Box>

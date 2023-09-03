@@ -15,7 +15,7 @@ import { Settings } from 'src/@core/context/settingsContext'
 
 // Features
 import Zoom from 'src/features/toolbar-horizontal/Zoom'
-import CursorTools from 'src/features/toolbar-horizontal/cursor-tools/CursorTools'
+import CursorTools from 'src/features/cursor-tools/CursorToolBar'
 
 interface Props {
   hidden: boolean

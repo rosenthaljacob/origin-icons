@@ -11,19 +11,7 @@ import { Icon } from '@iconify/react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'src/state/store'
 import { SET_CURSOR_TOOL } from 'src/state/toolbarSlice'
-
-const TOOLS = [
-  {
-    name: 'draw',
-    icon: 'tabler:brush',
-    label: 'Path'
-  },
-  {
-    name: 'pan',
-    icon: 'tabler:move',
-    label: 'Pan'
-  }
-]
+import { TOOL_LIST } from './toolList'
 
 export default function CursorTools() {
   const dispatch = useDispatch()
@@ -35,7 +23,7 @@ export default function CursorTools() {
 
   return (
     <Stack direction='row' spacing={2}>
-      {TOOLS.map(tool => (
+      {TOOL_LIST.map(tool => (
         <Button
           key={tool.name}
           variant={cursorTool === tool.name ? 'contained' : 'outlined'}
