@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useCanvas } from 'src/features/canvas/CanvasProvider'
 
+// Redux
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/state/store'
+
 export default function DrawListener() {
   const [currentPath, setCurrentPath] = useState<string | null>(null)
   const pathRef = useRef<SVGPathElement>(null)
@@ -8,6 +12,9 @@ export default function DrawListener() {
   const {
     mouseData: { mousePosition, isMouseDown }
   } = useCanvas()
+
+  // Redux
+  const { draw } = useSelector((state: RootState) => state.toolStyle)
 
   useEffect(() => {
     if (!isMouseDown) return
@@ -39,10 +46,8 @@ export default function DrawListener() {
       <path
         ref={pathRef}
         d={currentPath}
-        fill='none'
         style={{
-          stroke: 'red',
-          strokeWidth: 4
+          ...draw
         }}
       />
     )

@@ -4,6 +4,8 @@ import { ReactNode, useRef, useState } from 'react'
 // ** MUI Import
 import List from '@mui/material/List'
 import Box, { BoxProps } from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Divider from '@mui/material/Divider'
 import { styled, useTheme } from '@mui/material/styles'
 
 // ** Third Party Components
@@ -134,16 +136,20 @@ const Navigation = (props: Props) => {
               })}
         >
           {beforeVerticalNavMenuContent ? beforeVerticalNavMenuContent(props) : null}
-          <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-            {userVerticalNavMenuContent ? (
-              userVerticalNavMenuContent(props)
-            ) : (
-              <List className='nav-items' sx={{ transition: 'padding .25s ease', pr: 4.5 }}>
+          <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} padding={4}>
+            <Box>
+              <Typography variant='h6'>
                 {TOOL_LIST.map(tool => {
-                  if (tool.name === cursorTool) return tool.optionsComponent
+                  if (tool.name === cursorTool) return tool.label
                 })}
-              </List>
-            )}
+              </Typography>
+            </Box>
+            <Divider sx={{ my: 2 }} />
+            <List className='nav-items' sx={{ transition: 'padding .25s ease', pr: 4.5 }}>
+              {TOOL_LIST.map(tool => {
+                if (tool.name === cursorTool) return tool.optionsComponent
+              })}
+            </List>
           </Box>
         </ScrollWrapper>
       </Box>

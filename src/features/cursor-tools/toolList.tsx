@@ -4,7 +4,7 @@ export const TOOL_LIST = [
   {
     name: 'draw',
     icon: 'tabler:brush',
-    label: 'Path',
+    label: 'Draw',
     optionsComponent: <DrawOptions />
   },
   {

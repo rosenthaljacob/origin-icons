@@ -1,15 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import toolbarReducer, { ToolbarState } from './toolbarSlice'
-import canvasReducer, { CanvasState } from './canvasSlice'
+import toolStyleReducer, { ToolStyleState } from './toolStyleSlice'
 
 export interface RootState {
   toolbar: ToolbarState
-  canvas: CanvasState
+  toolStyle: ToolStyleState
 }
 
 export const reduxStore = configureStore({
   reducer: {
     toolbar: toolbarReducer,
-    canvas: canvasReducer
+    toolStyle: toolStyleReducer
   }
 })

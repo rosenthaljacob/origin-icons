@@ -1,25 +1,28 @@
 import React from 'react'
 import Input from '@mui/material/Input'
 import Stack from '@mui/material/Stack'
-import Slider from '@mui/material/Slider'
+import Typography from '@mui/material/Typography'
 
-export default function StrokeWidth() {
+interface StrokeWidthProps {
+  strokeWidth?: number
+  setStrokeWidth?: (value: number) => void
+}
+
+export default function StrokeWidth({ strokeWidth, setStrokeWidth }: StrokeWidthProps) {
   return (
-    <Stack direction='row' spacing={2}>
-      <Input
-        sx={{ width: 42 }}
-        value={20}
-        margin='dense'
-        onChange={() => {}}
-        inputProps={{
-          step: 10,
-          min: 0,
-          max: 100,
-          type: 'number',
-          'aria-labelledby': 'input-slider'
-        }}
-      />
-      <Slider aria-label='Small' defaultValue={20} valueLabelDisplay='auto' step={10} marks min={0} max={100} />
+    <Stack spacing={1.5}>
+      <Typography variant='subtitle2'>Stroke Width</Typography>
+      <Stack direction='row' spacing={2}>
+        <Input
+          fullWidth
+          value={strokeWidth}
+          onChange={e => setStrokeWidth && setStrokeWidth(Number(e.target.value))}
+          inputProps={{
+            min: 1,
+            type: 'number'
+          }}
+        />
+      </Stack>
     </Stack>
   )
 }
