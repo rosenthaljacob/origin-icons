@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // Canvas
 import { useCanvas } from 'src/features/canvas/CanvasProvider'
@@ -17,7 +17,7 @@ export default function PanListener() {
   const [panStartEvent, setPanStartEvent] = useState<PanStartEvent | null>(null)
 
   // Effects
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!isMouseDown) {
       if (panStartEvent) {
         setPanStartEvent(null)

@@ -50,7 +50,7 @@ export const CanvasProvider: React.FC<MousePositionProviderProps> = ({ children 
 
   // Redux
   const { zoomPercentage } = useSelector((state: RootState) => state.toolbar)
-  const timesBy = zoomPercentage / 100
+  const devideBy = zoomPercentage / 100
 
   const updateMousePosition = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -59,7 +59,7 @@ export const CanvasProvider: React.FC<MousePositionProviderProps> = ({ children 
 
     setMouseData({
       relativeMousePosition: { x, y },
-      mousePosition: { x: x * timesBy, y: y * timesBy },
+      mousePosition: { x: x / devideBy, y: y / devideBy },
       client: { x: e.clientX, y: e.clientY },
       isMouseDown: e.buttons === 1
     })

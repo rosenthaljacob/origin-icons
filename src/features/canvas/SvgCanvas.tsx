@@ -10,6 +10,7 @@ import Box from '@mui/material/Box'
 
 // EventListeners
 import PanListener from 'src/features/eventListeners/PanListener'
+import DrawListener from '../eventListeners/DrawListener'
 
 const SVGCanvas: React.FC = () => {
   const {
@@ -49,8 +50,10 @@ const SVGCanvas: React.FC = () => {
         onMouseDown={() => setMouseDown(true)}
         onMouseUp={() => setMouseDown(false)}
         onMouseMove={handleMouseMove}
-      ></svg>
-      {cursorTool === 'pan' && <PanListener />}
+      >
+        {cursorTool === 'pan' && <PanListener />}
+        {cursorTool === 'draw' && <DrawListener />}
+      </svg>
     </Box>
   )
 }

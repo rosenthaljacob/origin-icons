@@ -14,7 +14,7 @@ import { SET_CURSOR_TOOL } from 'src/state/toolbarSlice'
 
 const TOOLS = [
   {
-    name: 'path',
+    name: 'draw',
     icon: 'tabler:brush',
     label: 'Path'
   },
