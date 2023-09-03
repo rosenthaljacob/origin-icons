@@ -133,13 +133,9 @@ const Navigation = (props: Props) => {
               userVerticalNavMenuContent(props)
             ) : (
               <List className='nav-items' sx={{ transition: 'padding .25s ease', pr: 4.5 }}>
-                <VerticalNavItems
-                  groupActive={groupActive}
-                  setGroupActive={setGroupActive}
-                  currentActiveGroup={currentActiveGroup}
-                  setCurrentActiveGroup={setCurrentActiveGroup}
-                  {...props}
-                />
+                {/* {
+                  Options go here
+                } */}
               </List>
             )}
           </Box>

@@ -38,6 +38,7 @@ const SVGCanvas: React.FC = () => {
       top={pan.y}
       border='1px solid black'
       position={'absolute'}
+      p={0}
       sx={{
         backgroundColor: 'white'
       }}
