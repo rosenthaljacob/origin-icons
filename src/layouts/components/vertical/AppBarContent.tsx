@@ -5,16 +5,16 @@ import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import InputAdornment from '@mui/material/InputAdornment'
-import Button from '@mui/material/Button'
-import ButtonGroup from '@mui/material/ButtonGroup'
 
 // ** Icons Imports
 import Menu from 'mdi-material-ui/Menu'
 import Magnify from 'mdi-material-ui/Magnify'
-import { Icon } from '@iconify/react'
 
 // ** Type Import
 import { Settings } from 'src/@core/context/settingsContext'
+
+// Features
+import Zoom from 'src/features/toolbar-horizontal/Zoom'
 
 interface Props {
   hidden: boolean
@@ -62,15 +62,7 @@ const AppBarContent = (props: Props) => {
           }}
         />
         {/* Zoom */}
-        <ButtonGroup>
-          <Button variant='contained' color='primary' disableElevation>
-            <Icon icon='tabler:zoom-in' />
-          </Button>
-          <Box>100%</Box>
-          <Button variant='contained' color='primary' disableElevation>
-            <Icon icon='tabler:zoom-out' />
-          </Button>
-        </ButtonGroup>
+        <Zoom />
       </Box>
       <Box className='actions-right' sx={{ display: 'flex', alignItems: 'center' }}></Box>
     </Box>
