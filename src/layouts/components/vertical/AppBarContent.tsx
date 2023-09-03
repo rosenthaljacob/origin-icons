@@ -15,6 +15,7 @@ import { Settings } from 'src/@core/context/settingsContext'
 
 // Features
 import Zoom from 'src/features/toolbar-horizontal/Zoom'
+import CursorTools from 'src/features/toolbar-horizontal/cursor-tools/CursorTools'
 
 interface Props {
   hidden: boolean
@@ -63,6 +64,8 @@ const AppBarContent = (props: Props) => {
         />
         {/* Zoom */}
         <Zoom />
+        {/* Cursor Tools */}
+        <CursorTools />
       </Box>
       <Box className='actions-right' sx={{ display: 'flex', alignItems: 'center' }}></Box>
     </Box>
