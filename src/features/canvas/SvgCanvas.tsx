@@ -58,7 +58,7 @@ const SVGCanvas: React.FC = () => {
           {cursorTool === 'draw' && <DrawListener />}
         </svg>
       </Box>
-      <SelectListener />
+      {cursorTool === 'select' && <SelectListener />}
     </>
   )
 }

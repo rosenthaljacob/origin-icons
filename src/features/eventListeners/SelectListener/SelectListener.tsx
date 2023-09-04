@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 // Local
 import HoverElement from './HoverElement'
+import SelectedElements from './SelectedElements'
 
 export default function SelectListener() {
   const [hoverElement, setHoverElement] = useState<SVGElement | null>(null)
@@ -13,8 +14,6 @@ export default function SelectListener() {
     setHoverElement(target)
   }
   const handleMouseDown = (ev: MouseEvent) => {
-    const target = ev.target as SVGElement
-
     if (!hoverElement) {
       // Start drag select here
       setSelectedElements([])
@@ -32,24 +31,23 @@ export default function SelectListener() {
   }
 
   useEffect(() => {
-    console.log('hoverElement', hoverElement)
-  }, [hoverElement])
-
-  useEffect(() => {
     if (typeof window === 'undefined') return
 
     const svg = document.getElementById('svg-canvas')
     if (!svg) return
 
-    svg.addEventListener('mousemove', e => handleMouseOver(e))
+    svg.addEventListener('mousemove', handleMouseOver)
+    svg.addEventListener('click', handleMouseDown)
 
     return () => {
-      svg.removeEventListener('mousemove', e => handleMouseOver(e))
+      svg.removeEventListener('mousemove', handleMouseOver)
+      svg.removeEventListener('click', handleMouseDown)
     }
-  }, [])
+  }, [selectedElements, hoverElement])
   return (
     <>
       <HoverElement hoverElement={hoverElement} />
+      <SelectedElements selectedElements={selectedElements} />
     </>
   )
 }
