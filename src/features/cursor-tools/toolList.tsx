@@ -12,5 +12,11 @@ export const TOOL_LIST = [
     icon: 'tabler:move',
     label: 'Pan',
     optionsComponent: null
+  },
+  {
+    name: 'select',
+    icon: 'tabler:cursor',
+    label: 'Select',
+    optionsComponent: null
   }
 ]

@@ -7,7 +7,14 @@ import SVGCanvas from 'src/features/canvas/SvgCanvas'
 
 const Dashboard = () => {
   return (
-    <Box width='100%' height='100%' position='relative' overflow='hidden' sx={{ backgroundColor: 'grey.500' }}>
+    <Box
+      width='100%'
+      height='100%'
+      position='relative'
+      overflow='hidden'
+      id='canvas-container'
+      sx={{ backgroundColor: 'grey.500' }}
+    >
       <CanvasProvider>
         <SVGCanvas />
       </CanvasProvider>
