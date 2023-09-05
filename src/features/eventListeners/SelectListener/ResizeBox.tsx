@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 // @mui
-import Box from '@mui/material/Box'
 import { useTheme } from '@mui/material/styles'
 // Redux
 import { useSelector } from 'react-redux'
@@ -81,7 +80,8 @@ export default function ResizeBox({ el, boxPosition, rect, updatePosition, selec
       size={boxPosition}
       position={boxPosition}
       style={{
-        border: '1px solid black'
+        border: `2px solid ${theme.palette.primary.main}`,
+        outline: `1px solid ${theme.palette.grey[100]}`
       }}
       onDragStop={handleDragStop}
       onResizeStop={handleResizeStop}
