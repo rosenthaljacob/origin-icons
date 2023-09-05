@@ -1,50 +1,52 @@
-import React from 'react'
+import React, { useState, useMemo } from 'react'
 // @mui
 import Box from '@mui/material/Box'
+// Local
+import ResizeBox from './ResizeBox'
 
 interface SelectedElementsProps {
   selectedElements: SVGElement[]
 }
 
 export default function SelectedElements({ selectedElements }: SelectedElementsProps) {
-  const elementData = selectedElements.map(el => {
-    const rect = el.getBoundingClientRect()
-    const { x, y, width, height } = rect
+  const [positionCounter, setPositionCounter] = useState(0)
 
-    const container = document.getElementById('canvas-container')
-    if (!container) throw new Error('Could not find element with id "canvas-container"')
+  const elementData = useMemo(
+    () =>
+      selectedElements.map(el => {
+        const rect = el.getBoundingClientRect()
+        const { x, y, width, height } = rect
 
-    const { x: containerX, y: containerY } = container.getBoundingClientRect()
+        const container = document.getElementById('canvas-container')
+        if (!container) throw new Error('Could not find element with id "canvas-container"')
 
-    const boxPosition = {
-      x: (width < 20 ? Math.ceil(x - 5) : Math.ceil(x)) - containerX - 5,
-      y: (height < 20 ? Math.ceil(y - 5) : Math.ceil(y)) - containerY - 5,
-      width: width < 20 ? Math.ceil(width + 10) : Math.ceil(width) + 10,
-      height: height < 20 ? Math.ceil(height + 10) : Math.ceil(height) + 10
-    }
+        const { x: containerX, y: containerY } = container.getBoundingClientRect()
 
-    return {
-      el,
-      rect,
-      boxPosition
-    }
-  })
+        const boxPosition = {
+          x: (width < 20 ? Math.ceil(x - 5) : Math.ceil(x)) - containerX,
+          y: (height < 20 ? Math.ceil(y - 5) : Math.ceil(y)) - containerY,
+          width: width < 20 ? Math.ceil(width + 10) : Math.ceil(width),
+          height: height < 20 ? Math.ceil(height + 10) : Math.ceil(height)
+        }
+
+        return {
+          el,
+          rect,
+          boxPosition
+        }
+      }),
+    [selectedElements, positionCounter]
+  )
+
+  const handleUpdateElementsPosition = () => setPositionCounter(prev => prev + 1)
 
   return (
     <>
       {elementData.map(({ boxPosition, el, rect }, index) => {
         return (
-          <Box
-            key={index}
-            component='span'
-            position='absolute'
-            top={boxPosition.y}
-            left={boxPosition.x}
-            width={boxPosition.width}
-            height={boxPosition.height}
-            border={2}
-            borderColor='primary.main'
-          />
+          <>
+            <ResizeBox el={el} boxPosition={boxPosition} rect={rect} updatePosition={handleUpdateElementsPosition} />
+          </>
         )
       })}
     </>
