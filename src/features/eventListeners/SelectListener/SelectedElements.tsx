@@ -45,7 +45,13 @@ export default function SelectedElements({ selectedElements }: SelectedElementsP
       {elementData.map(({ boxPosition, el, rect }, index) => {
         return (
           <>
-            <ResizeBox el={el} boxPosition={boxPosition} rect={rect} updatePosition={handleUpdateElementsPosition} />
+            <ResizeBox
+              el={el}
+              boxPosition={boxPosition}
+              rect={rect}
+              updatePosition={handleUpdateElementsPosition}
+              selectedElements={selectedElements}
+            />
           </>
         )
       })}

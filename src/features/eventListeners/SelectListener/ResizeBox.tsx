@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 // @mui
 import Box from '@mui/material/Box'
+import { useTheme } from '@mui/material/styles'
 // Redux
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/state/store'
@@ -18,6 +19,7 @@ interface ResizeBoxProps {
   }
   updatePosition: () => void
   rect: DOMRect
+  selectedElements: SVGElement[]
 }
 
 type Drag = {
@@ -25,8 +27,8 @@ type Drag = {
   startY: number
 }
 
-export default function ResizeBox({ el, boxPosition, rect, updatePosition }: ResizeBoxProps) {
-  const element = SVG(el)
+export default function ResizeBox({ el, boxPosition, rect, updatePosition, selectedElements }: ResizeBoxProps) {
+  const theme = useTheme()
 
   const { zoomPercentage } = useSelector((state: RootState) => state.toolbar)
   const zoomInt = zoomPercentage / 100
@@ -36,7 +38,10 @@ export default function ResizeBox({ el, boxPosition, rect, updatePosition }: Res
     const newX = (x - boxPosition.x) * zoomInt
     const newY = (y - boxPosition.y) * zoomInt
 
-    element.dmove(newX, newY)
+    selectedElements.forEach(el => {
+      const element = SVG(el)
+      element.dmove(newX, newY)
+    })
     updatePosition()
   }
 
@@ -47,16 +52,27 @@ export default function ResizeBox({ el, boxPosition, rect, updatePosition }: Res
     delta: ResizableDelta,
     position: { x: number; y: number }
   ) => {
-    const width = parseInt(ref.style.width) * zoomInt
-    const height = parseInt(ref.style.height) * zoomInt
-    const x = parseInt(ref.style.left) * zoomInt
-    const y = parseInt(ref.style.top) * zoomInt
+    const prevWidth = boxPosition.width
+    const prevHeight = boxPosition.height
 
     const newX = (position.x - boxPosition.x) * zoomInt
     const newY = (position.y - boxPosition.y) * zoomInt
 
-    element.size(width, height)
-    element.dmove(newX, newY)
+    const width = parseInt(ref.style.width) / zoomInt
+    const height = parseInt(ref.style.height) / zoomInt
+
+    selectedElements.forEach(el => {
+      const elementRect = el.getBoundingClientRect()
+      const widthRatio = elementRect.width / prevWidth
+      const heightRatio = elementRect.height / prevHeight
+      const newWidth = width * widthRatio
+      const newHeight = height * heightRatio
+
+      const element = SVG(el)
+
+      element.size(newWidth, newHeight)
+      element.dmove(newX, newY)
+    })
     updatePosition()
   }
 
