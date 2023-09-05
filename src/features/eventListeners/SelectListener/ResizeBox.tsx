@@ -51,8 +51,8 @@ export default function ResizeBox({ el, boxPosition, rect, updatePosition, selec
     delta: ResizableDelta,
     position: { x: number; y: number }
   ) => {
-    const prevWidth = boxPosition.width
-    const prevHeight = boxPosition.height
+    const prevWidth = rect.width
+    const prevHeight = rect.height
 
     const newX = (position.x - boxPosition.x) * zoomInt
     const newY = (position.y - boxPosition.y) * zoomInt
