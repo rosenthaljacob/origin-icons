@@ -12,6 +12,7 @@ import Box from '@mui/material/Box'
 import PanListener from 'src/features/eventListeners/PanListener'
 import DrawListener from '../eventListeners/DrawListener'
 import SelectListener from '../eventListeners/SelectListener/SelectListener'
+import ShapeListener, { SUPPORTED_SHAPES } from '../eventListeners/ShapeListener'
 
 const SVGCanvas: React.FC = () => {
   const {
@@ -56,6 +57,7 @@ const SVGCanvas: React.FC = () => {
         >
           {cursorTool === 'pan' && <PanListener />}
           {cursorTool === 'draw' && <DrawListener />}
+          {SUPPORTED_SHAPES.includes(cursorTool) && <ShapeListener />}
         </svg>
       </Box>
       {cursorTool === 'select' && <SelectListener />}
