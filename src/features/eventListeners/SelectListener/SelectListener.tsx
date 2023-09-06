@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 // Local
 import HoverElement from './HoverElement'
 import SelectedElements from './SelectedElements'
+import { useSelectedElements } from 'src/hooks/useSelectedElements'
 
 export default function SelectListener() {
+  const { selectedElements, setSelectedElements } = useSelectedElements()
   const [hoverElement, setHoverElement] = useState<SVGElement | null>(null)
-  const [selectedElements, setSelectedElements] = useState<SVGElement[]>([])
 
   const handleMouseOver = (ev: MouseEvent) => {
     const target = ev.target as SVGElement
@@ -47,7 +48,7 @@ export default function SelectListener() {
   return (
     <>
       <HoverElement hoverElement={hoverElement} />
-      <SelectedElements selectedElements={selectedElements} />
+      <SelectedElements />
     </>
   )
 }

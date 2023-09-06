@@ -5,12 +5,12 @@ import Box from '@mui/material/Box'
 import ResizeBox from './ResizeBox'
 // Hooks
 import { useCavasUpdater } from 'src/hooks/useCanvasUpdater'
+import { useSelectedElements } from 'src/hooks/useSelectedElements'
 
-interface SelectedElementsProps {
-  selectedElements: SVGElement[]
-}
+interface SelectedElementsProps {}
 
-export default function SelectedElements({ selectedElements }: SelectedElementsProps) {
+export default function SelectedElements({}: SelectedElementsProps) {
+  const { selectedElements } = useSelectedElements()
   const { updateSubscriber } = useCavasUpdater()
 
   const elementData = useMemo(
@@ -45,7 +45,7 @@ export default function SelectedElements({ selectedElements }: SelectedElementsP
       {elementData.map(({ boxPosition, el, rect }, index) => {
         return (
           <>
-            <ResizeBox el={el} boxPosition={boxPosition} rect={rect} selectedElements={selectedElements} />
+            <ResizeBox el={el} boxPosition={boxPosition} rect={rect} />
           </>
         )
       })}

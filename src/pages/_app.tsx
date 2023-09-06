@@ -17,6 +17,7 @@ import { reduxStore } from 'src/state/store'
 
 // Providers
 import CanvasUpdaterProvider from 'src/features/canvas/CanvasUpdaterProvider'
+import SelectedElementsProvider from 'src/features/canvas/SelectedElementsProvider'
 
 // ** Config Imports
 import themeConfig from 'src/configs/themeConfig'
@@ -80,11 +81,13 @@ const App = (props: ExtendedAppProps) => {
 
         <SettingsProvider>
           <CanvasUpdaterProvider>
-            <SettingsConsumer>
-              {({ settings }) => {
-                return <ThemeComponent settings={settings}>{getLayout(<Component {...pageProps} />)}</ThemeComponent>
-              }}
-            </SettingsConsumer>
+            <SelectedElementsProvider>
+              <SettingsConsumer>
+                {({ settings }) => {
+                  return <ThemeComponent settings={settings}>{getLayout(<Component {...pageProps} />)}</ThemeComponent>
+                }}
+              </SettingsConsumer>
+            </SelectedElementsProvider>
           </CanvasUpdaterProvider>
         </SettingsProvider>
       </CacheProvider>

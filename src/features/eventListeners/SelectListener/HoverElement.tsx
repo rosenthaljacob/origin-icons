@@ -2,12 +2,16 @@ import React, { useMemo } from 'react'
 // @mui
 import Box from '@mui/material/Box'
 import { useTheme } from '@mui/material/styles'
+// Hooks
+import { useCavasUpdater } from 'src/hooks/useCanvasUpdater'
 
 interface HoverElementProps {
   hoverElement: SVGElement | null
 }
 
 export default function HoverElement({ hoverElement }: HoverElementProps) {
+  const { updateSubscriber } = useCavasUpdater()
+
   const { x, y, width, height } = useMemo(() => {
     if (!hoverElement || typeof window === 'undefined') return { x: 0, y: 0, width: 0, height: 0 }
     const container = document.getElementById('canvas-container')
@@ -23,7 +27,7 @@ export default function HoverElement({ hoverElement }: HoverElementProps) {
     const safeHeight = height < 10 ? Math.ceil(height + 10) : Math.ceil(height)
 
     return { x: safeX - containerX, y: safeY - containerY, width: safeWidth, height: safeHeight }
-  }, [hoverElement])
+  }, [hoverElement, updateSubscriber])
 
   const theme = useTheme()
 

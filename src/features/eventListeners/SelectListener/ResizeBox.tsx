@@ -9,6 +9,7 @@ import { SVG } from '@svgdotjs/svg.js'
 import { Rnd, DraggableData, ResizableDelta } from 'react-rnd'
 // Hooks
 import { useCavasUpdater } from 'src/hooks/useCanvasUpdater'
+import { useSelectedElements } from 'src/hooks/useSelectedElements'
 
 interface ResizeBoxProps {
   el: SVGElement
@@ -19,7 +20,6 @@ interface ResizeBoxProps {
     height: number
   }
   rect: DOMRect
-  selectedElements: SVGElement[]
 }
 
 type Drag = {
@@ -27,7 +27,9 @@ type Drag = {
   startY: number
 }
 
-export default function ResizeBox({ el, boxPosition, rect, selectedElements }: ResizeBoxProps) {
+export default function ResizeBox({ el, boxPosition, rect }: ResizeBoxProps) {
+  const { selectedElements } = useSelectedElements()
+
   const theme = useTheme()
   const { updateCanvas } = useCavasUpdater()
 
@@ -81,6 +83,8 @@ export default function ResizeBox({ el, boxPosition, rect, selectedElements }: R
     <Rnd
       size={boxPosition}
       position={boxPosition}
+      minHeight={5}
+      minWidth={5}
       style={{
         border: `2px solid ${theme.palette.primary.main}`,
         outline: `1px solid ${theme.palette.grey[100]}`
