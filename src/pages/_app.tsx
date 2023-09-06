@@ -15,6 +15,9 @@ import type { EmotionCache } from '@emotion/cache'
 import { Provider as ReduxStateProvider } from 'react-redux'
 import { reduxStore } from 'src/state/store'
 
+// Providers
+import CanvasUpdaterProvider from 'src/features/canvas/CanvasUpdaterProvider'
+
 // ** Config Imports
 import themeConfig from 'src/configs/themeConfig'
 
@@ -76,11 +79,13 @@ const App = (props: ExtendedAppProps) => {
         </Head>
 
         <SettingsProvider>
-          <SettingsConsumer>
-            {({ settings }) => {
-              return <ThemeComponent settings={settings}>{getLayout(<Component {...pageProps} />)}</ThemeComponent>
-            }}
-          </SettingsConsumer>
+          <CanvasUpdaterProvider>
+            <SettingsConsumer>
+              {({ settings }) => {
+                return <ThemeComponent settings={settings}>{getLayout(<Component {...pageProps} />)}</ThemeComponent>
+              }}
+            </SettingsConsumer>
+          </CanvasUpdaterProvider>
         </SettingsProvider>
       </CacheProvider>
     </ReduxStateProvider>

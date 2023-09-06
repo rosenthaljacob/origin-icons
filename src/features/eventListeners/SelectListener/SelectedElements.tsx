@@ -3,13 +3,15 @@ import React, { useState, useMemo } from 'react'
 import Box from '@mui/material/Box'
 // Local
 import ResizeBox from './ResizeBox'
+// Hooks
+import { useCavasUpdater } from 'src/hooks/useCanvasUpdater'
 
 interface SelectedElementsProps {
   selectedElements: SVGElement[]
 }
 
 export default function SelectedElements({ selectedElements }: SelectedElementsProps) {
-  const [positionCounter, setPositionCounter] = useState(0)
+  const { updateSubscriber } = useCavasUpdater()
 
   const elementData = useMemo(
     () =>
@@ -35,23 +37,15 @@ export default function SelectedElements({ selectedElements }: SelectedElementsP
           boxPosition
         }
       }),
-    [selectedElements, positionCounter]
+    [selectedElements, updateSubscriber]
   )
-
-  const handleUpdateElementsPosition = () => setPositionCounter(prev => prev + 1)
 
   return (
     <>
       {elementData.map(({ boxPosition, el, rect }, index) => {
         return (
           <>
-            <ResizeBox
-              el={el}
-              boxPosition={boxPosition}
-              rect={rect}
-              updatePosition={handleUpdateElementsPosition}
-              selectedElements={selectedElements}
-            />
+            <ResizeBox el={el} boxPosition={boxPosition} rect={rect} selectedElements={selectedElements} />
           </>
         )
       })}

@@ -7,6 +7,8 @@ import { RootState } from 'src/state/store'
 // SVG
 import { SVG } from '@svgdotjs/svg.js'
 import { Rnd, DraggableData, ResizableDelta } from 'react-rnd'
+// Hooks
+import { useCavasUpdater } from 'src/hooks/useCanvasUpdater'
 
 interface ResizeBoxProps {
   el: SVGElement
@@ -16,7 +18,6 @@ interface ResizeBoxProps {
     width: number
     height: number
   }
-  updatePosition: () => void
   rect: DOMRect
   selectedElements: SVGElement[]
 }
@@ -26,8 +27,9 @@ type Drag = {
   startY: number
 }
 
-export default function ResizeBox({ el, boxPosition, rect, updatePosition, selectedElements }: ResizeBoxProps) {
+export default function ResizeBox({ el, boxPosition, rect, selectedElements }: ResizeBoxProps) {
   const theme = useTheme()
+  const { updateCanvas } = useCavasUpdater()
 
   const { zoomPercentage } = useSelector((state: RootState) => state.toolbar)
   const zoomInt = zoomPercentage / 100
@@ -41,7 +43,7 @@ export default function ResizeBox({ el, boxPosition, rect, updatePosition, selec
       const element = SVG(el)
       element.dmove(newX, newY)
     })
-    updatePosition()
+    updateCanvas()
   }
 
   const handleResizeStop = (
@@ -72,7 +74,7 @@ export default function ResizeBox({ el, boxPosition, rect, updatePosition, selec
       element.size(newWidth, newHeight)
       element.dmove(newX, newY)
     })
-    updatePosition()
+    updateCanvas()
   }
 
   return (
@@ -85,6 +87,6 @@ export default function ResizeBox({ el, boxPosition, rect, updatePosition, selec
       }}
       onDragStop={handleDragStop}
       onResizeStop={handleResizeStop}
-    ></Rnd>
+    />
   )
 }
