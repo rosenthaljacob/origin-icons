@@ -5,9 +5,9 @@ import { useCanvas } from 'src/features/canvas/CanvasProvider'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/state/store'
 // Utils
-import { calculateEllipse, calculateCircle, calculateRectangle } from 'src/utils/elementCreation'
+import { calculateEllipse, calculateCircle, calculateRectangle, calculateLine } from 'src/utils/elementCreation'
 
-export const SUPPORTED_SHAPES = ['circle', 'ellipse', 'rectangle']
+export const SUPPORTED_SHAPES = ['circle', 'ellipse', 'rectangle', 'line']
 
 interface ShapePoint {
   x: number
@@ -23,7 +23,9 @@ export default function ShapeListener() {
   const [currentShape, setCurrentShape] = useState<CurrentShape | null>(null)
   const shapeRef = useRef<SVGElement>(null)
 
-  const { zoomPercentage, cursorTool } = useSelector((state: RootState) => state.toolbar)
+  // Redux
+  const { shape, line } = useSelector((state: RootState) => state.toolStyle)
+  const { cursorTool } = useSelector((state: RootState) => state.toolbar)
 
   const {
     mouseData: { mousePosition, isMouseDown }
@@ -62,44 +64,23 @@ export default function ShapeListener() {
   if (cursorTool === 'circle') {
     const circleData = calculateCircle(currentShape.start, currentShape.currentPos)
 
-    return (
-      <circle
-        ref={shapeRef as any}
-        {...circleData}
-        style={{
-          // ...draw
-          fill: 'red'
-        }}
-      />
-    )
+    return <circle ref={shapeRef as any} {...circleData} style={shape} />
   }
 
   if (cursorTool === 'ellipse') {
-    return (
-      <ellipse
-        ref={shapeRef as any}
-        {...ellipseData}
-        style={{
-          // ...draw
-          fill: 'red'
-        }}
-      />
-    )
+    return <ellipse ref={shapeRef as any} {...ellipseData} style={shape} />
   }
 
   if (cursorTool === 'rectangle') {
     const rectangleData = calculateRectangle(currentShape.start, currentShape.currentPos)
 
-    return (
-      <rect
-        ref={shapeRef as any}
-        {...rectangleData}
-        style={{
-          // ...draw
-          fill: 'red'
-        }}
-      />
-    )
+    return <rect ref={shapeRef as any} {...rectangleData} style={shape} />
+  }
+
+  if (cursorTool === 'line') {
+    const lineData = calculateLine(currentShape.start, currentShape.currentPos)
+
+    return <line ref={shapeRef as any} {...lineData} style={line} />
   }
 
   return null

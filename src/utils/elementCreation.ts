@@ -44,3 +44,10 @@ export function calculateRectangle(point1: Coordinate, point2: Coordinate) {
 
   return { x, y, width, height }
 }
+
+export function calculateLine(point1: Coordinate, point2: Coordinate) {
+  const { x: x1, y: y1 } = point1
+  const { x: x2, y: y2 } = point2
+
+  return { x1, y1, x2, y2 }
+}

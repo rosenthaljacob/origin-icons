@@ -10,7 +10,7 @@ import Stack from '@mui/material/Stack'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'src/state/store'
-import { SET_TOOL_STYLE_ITEM } from 'src/state/toolStyleSlice'
+import { SET_DRAW_STYLE_ITEM } from 'src/state/toolStyleSlice'
 
 export default function DrawOptions() {
   const dispatch = useDispatch()
@@ -18,7 +18,7 @@ export default function DrawOptions() {
   const { draw } = useSelector((state: RootState) => state.toolStyle)
 
   const handleChange = (property: keyof RootState['toolStyle']['draw']) => (value: string | number) => {
-    dispatch(SET_TOOL_STYLE_ITEM({ property, value }))
+    dispatch(SET_DRAW_STYLE_ITEM({ property, value }))
   }
 
   return (

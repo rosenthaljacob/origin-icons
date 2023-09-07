@@ -1,4 +1,5 @@
 import DrawOptions from './options/DrawOptions'
+import ShapeOptions from './options/ShapeOptions'
 
 export const TOOL_LIST = [
   {
@@ -23,18 +24,24 @@ export const TOOL_LIST = [
     name: 'circle',
     icon: 'tabler:circle',
     label: 'Circle',
-    optionsComponent: null
+    optionsComponent: <ShapeOptions />
   },
   {
     name: 'ellipse',
     icon: 'tabler:circle',
     label: 'Ellipse',
-    optionsComponent: null
+    optionsComponent: <ShapeOptions />
   },
   {
     name: 'rectangle',
     icon: 'tabler:square',
     label: 'Rectangle',
+    optionsComponent: <ShapeOptions />
+  },
+  {
+    name: 'line',
+    icon: 'tabler:line',
+    label: 'Line',
     optionsComponent: null
   }
 ]
