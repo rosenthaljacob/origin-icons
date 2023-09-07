@@ -24,7 +24,7 @@ import VerticalNavHeader from './VerticalNavHeader'
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
 // Options
-import { TOOL_LIST } from 'src/features/cursor-tools/toolList'
+import { TOOL_LIST } from 'src/features/cursor-tools/tools'
 
 // Redux
 import { useSelector } from 'react-redux'

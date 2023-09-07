@@ -1,5 +1,6 @@
 import DrawOptions from './options/DrawOptions'
 import ShapeOptions from './options/ShapeOptions'
+import LineOptions from './options/LineOptions'
 
 export const TOOL_LIST = [
   {
@@ -42,6 +43,6 @@ export const TOOL_LIST = [
     name: 'line',
     icon: 'tabler:line',
     label: 'Line',
-    optionsComponent: null
+    optionsComponent: <LineOptions />
   }
 ]

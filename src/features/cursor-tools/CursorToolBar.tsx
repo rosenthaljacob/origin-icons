@@ -11,7 +11,7 @@ import { Icon } from '@iconify/react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'src/state/store'
 import { SET_CURSOR_TOOL } from 'src/state/toolbarSlice'
-import { TOOL_LIST } from './toolList'
+import { TOOL_LIST } from './tools'
 
 export default function CursorTools() {
   const dispatch = useDispatch()
