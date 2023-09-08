@@ -5,8 +5,7 @@ import SelectedElements from './SelectedElements'
 import { useSelectedElements } from 'src/hooks/useSelectedElements'
 
 export default function SelectListener() {
-  const { selectedElements, setSelectedElements } = useSelectedElements()
-  const [hoverElement, setHoverElement] = useState<SVGElement | null>(null)
+  const { selectedElements, setSelectedElements, hoverElement, setHoverElement } = useSelectedElements()
 
   const handleMouseOver = (ev: MouseEvent) => {
     const target = ev.target as SVGElement

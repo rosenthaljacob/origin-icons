@@ -50,7 +50,7 @@ const ContentWrapper = styled('main')(({ theme }) => ({
 
 const VerticalLayout = (props: LayoutProps) => {
   // ** Props
-  const { settings, children, scrollToTop } = props
+  const { settings, children } = props
 
   // ** Vars
   const { contentWidth } = settings
@@ -100,17 +100,6 @@ const VerticalLayout = (props: LayoutProps) => {
           </DatePickerWrapper>
         </MainContentWrapper>
       </VerticalLayoutWrapper>
-
-      {/* Scroll to top button */}
-      {scrollToTop ? (
-        scrollToTop(props)
-      ) : (
-        <ScrollToTop className='mui-fixed'>
-          <Fab color='primary' size='small' aria-label='scroll back to top'>
-            <ArrowUp />
-          </Fab>
-        </ScrollToTop>
-      )}
     </>
   )
 }

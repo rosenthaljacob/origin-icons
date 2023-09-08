@@ -17,7 +17,6 @@ import { VerticalNavItemsType } from 'src/@core/layouts/types'
 
 // ** Component Imports
 import Drawer from './Drawer'
-import VerticalNavItems from './VerticalNavItems'
 import VerticalNavHeader from './VerticalNavHeader'
 
 // ** Util Import
