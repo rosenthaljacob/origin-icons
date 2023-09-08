@@ -3,7 +3,7 @@ import { ChromePicker } from 'react-color'
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material'
 
 interface FillOptionProps {
-  fillColor?: string
+  fillColor?: string | null
   setFillColor?: (color: string) => void
 }
 
@@ -26,7 +26,7 @@ export default function FillOption({ fillColor, setFillColor }: FillOptionProps)
         <FormControlLabel value='color' control={<Radio />} label='Color' />
       </RadioGroup>
       {fillOption === 'color' && (
-        <ChromePicker color={fillColor} onChangeComplete={color => setFillColor?.(color.hex)} />
+        <ChromePicker color={fillColor ?? undefined} onChangeComplete={color => setFillColor?.(color.hex)} />
       )}
     </FormControl>
   )

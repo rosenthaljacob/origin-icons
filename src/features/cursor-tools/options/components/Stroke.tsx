@@ -3,7 +3,7 @@ import { ChromePicker } from 'react-color'
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material'
 
 interface StrokeOptionProps {
-  strokeColor?: string
+  strokeColor?: string | null
   setStrokeColor?: (color: string) => void
 }
 
@@ -26,7 +26,7 @@ export default function StrokeOption({ strokeColor, setStrokeColor }: StrokeOpti
         <FormControlLabel value='color' control={<Radio />} label='Color' />
       </RadioGroup>
       {strokeOption === 'color' && (
-        <ChromePicker color={strokeColor} onChangeComplete={color => setStrokeColor?.(color.hex)} />
+        <ChromePicker color={strokeColor ?? undefined} onChangeComplete={color => setStrokeColor?.(color.hex)} />
       )}
     </FormControl>
   )

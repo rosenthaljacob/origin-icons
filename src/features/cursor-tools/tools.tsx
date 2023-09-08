@@ -1,6 +1,7 @@
 import DrawOptions from './options/DrawOptions'
 import ShapeOptions from './options/ShapeOptions'
 import LineOptions from './options/LineOptions'
+import SelectOptions from './options/SelectOptions'
 
 export const TOOL_LIST = [
   {
@@ -19,7 +20,7 @@ export const TOOL_LIST = [
     name: 'select',
     icon: 'tabler:cursor',
     label: 'Select',
-    optionsComponent: null
+    optionsComponent: <SelectOptions />
   },
   {
     name: 'circle',
